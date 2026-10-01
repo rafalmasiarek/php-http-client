@@ -1,0 +1,16 @@
+{
+    "name": "rafalmasiarek/http-client",
+    "description": "Lazy, concurrent curl-based HTTP client with DNS pinning, retry, SSE, caching, and rate limiting — extracted from rafalmasiarek/dashboard-kit.",
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "php": ">=8.2",
+        "psr/log": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "rafalmasiarek\\HttpClient\\": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
