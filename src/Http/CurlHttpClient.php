@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace rafalmasiarek\HttpClient\Http;
 
-use rafalmasiarek\HttpClient\Dns\DnsQueryException;
-use rafalmasiarek\HttpClient\Dns\DnsResolverInterface;
+use rafalmasiarek\DnsResolver\DnsQueryException;
+use rafalmasiarek\DnsResolver\DnsResolverInterface;
 
 /**
  * curl-based HttpClientInterface implementation. Resolves hostnames via an
