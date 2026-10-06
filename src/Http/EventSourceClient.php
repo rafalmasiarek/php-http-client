@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace rafalmasiarek\HttpClient\Http;
 
-use rafalmasiarek\HttpClient\Dns\DnsQueryException;
-use rafalmasiarek\HttpClient\Dns\DnsResolverInterface;
+use rafalmasiarek\DnsResolver\DnsQueryException;
+use rafalmasiarek\DnsResolver\DnsResolverInterface;
 
 /**
  * Consumes a "text/event-stream" (Server-Sent Events) endpoint, invoking a
