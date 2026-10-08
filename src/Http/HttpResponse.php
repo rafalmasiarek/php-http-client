@@ -27,6 +27,7 @@ final readonly class HttpResponse implements HttpResponseInterface
      * @param HttpTransportDebug|null    $debug      Timing/target info from curl_getinfo(), for diagnosing
      *                                                connectivity failures. Not populated by every
      *                                                HttpClientInterface implementation.
+     * @param TransportErrorKind|null    $errorKind  Structured classification of $error, when known.
      */
     public function __construct(
         public int $statusCode,
@@ -34,6 +35,7 @@ final readonly class HttpResponse implements HttpResponseInterface
         public string $body,
         public ?string $error = null,
         public ?HttpTransportDebug $debug = null,
+        public ?TransportErrorKind $errorKind = null,
     ) {
     }
 
@@ -75,6 +77,11 @@ final readonly class HttpResponse implements HttpResponseInterface
     public function getError(): ?string
     {
         return $this->error;
+    }
+
+    public function getErrorKind(): ?TransportErrorKind
+    {
+        return $this->errorKind;
     }
 
     public function getInfo(?string $key = null): mixed
