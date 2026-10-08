@@ -247,12 +247,13 @@ final class CurlHttpClient implements HttpClientInterface
 
         $errno = (int) $info['result'];
         $error = $errno !== 0 ? \curl_strerror($errno) : null;
+        $errorKind = $errno !== 0 ? TransportErrorKind::fromCurlErrno($errno) : null;
         $curlInfo = \curl_getinfo($ch);
         $statusCode = $errno === 0 ? (int) ($curlInfo['http_code'] ?? 0) : 0;
 
         \curl_close($ch);
 
-        $response->_hopFinished($statusCode, $error, $curlInfo);
+        $response->_hopFinished($statusCode, $error, $curlInfo, $errorKind);
     }
 
     /**

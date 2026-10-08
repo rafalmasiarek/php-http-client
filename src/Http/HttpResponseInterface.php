@@ -63,6 +63,17 @@ interface HttpResponseInterface
     public function getError(): ?string;
 
     /**
+     * Structured classification of getError() — for a caller that needs to
+     * branch on *why* a request failed without string-matching getError()'s
+     * free-text message. Based on curl's own error code (e.g.
+     * CURLE_OPERATION_TIMEDOUT), not the message text, so it's stable
+     * across curl/PHP versions. Null whenever getError() is null.
+     *
+     * @return TransportErrorKind|null
+     */
+    public function getErrorKind(): ?TransportErrorKind;
+
+    /**
      * Non-blocking transport metadata — never drives the transfer forward, so it's
      * safe to call at any time, including before this response has been read.
      *

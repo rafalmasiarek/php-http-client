@@ -30,6 +30,7 @@ final class CurlResponse implements HttpResponseInterface
     private array $headers = [];
     private string $body = '';
     private ?string $error = null;
+    private ?TransportErrorKind $errorKind = null;
 
     /** @var array<string, mixed> Snapshot of curl_getinfo() from the most recently finished hop. */
     private array $lastInfo = [];
@@ -110,6 +111,12 @@ final class CurlResponse implements HttpResponseInterface
         return $this->error;
     }
 
+    public function getErrorKind(): ?TransportErrorKind
+    {
+        $this->ensureComplete();
+        return $this->errorKind;
+    }
+
     public function getInfo(?string $key = null): mixed
     {
         $info = $this->hopDone || $this->done
@@ -140,6 +147,7 @@ final class CurlResponse implements HttpResponseInterface
         $this->hopDone = true;
         $this->statusCode = 0;
         $this->error = 'Request canceled.';
+        $this->errorKind = TransportErrorKind::Canceled;
     }
 
     /**
@@ -177,6 +185,7 @@ final class CurlResponse implements HttpResponseInterface
         $this->done = true;
         $this->statusCode = 0;
         $this->error = "Blocked request to \"{$host}\": target resolves to a private or reserved network address.";
+        $this->errorKind = TransportErrorKind::Blocked;
     }
 
     /**
@@ -184,10 +193,11 @@ final class CurlResponse implements HttpResponseInterface
      *
      * @param array<string, mixed> $info curl_getinfo() snapshot taken before close.
      */
-    public function _hopFinished(int $statusCode, ?string $error, array $info): void
+    public function _hopFinished(int $statusCode, ?string $error, array $info, ?TransportErrorKind $errorKind): void
     {
         $this->statusCode = $statusCode;
         $this->error = $error;
+        $this->errorKind = $errorKind;
         $this->lastInfo = $info;
         $this->hopDone = true;
         $this->handle = null;
