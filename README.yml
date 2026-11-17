@@ -7,7 +7,7 @@ context:
     Lazy, concurrent curl-based HTTP client with DNS pinning, retry, SSE, caching, and rate
     limiting — extracted from [dashboard-kit](https://github.com/rafalmasiarek/php-dashboard-kit).
 
-includes:
+footer_includes:
   - docs/api.md
 
 authors:
