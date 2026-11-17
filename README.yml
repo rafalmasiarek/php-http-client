@@ -1,0 +1,16 @@
+name: http-client
+repo_url: https://github.com/rafalmasiarek/php-http-client
+license: MIT
+
+context:
+  - |
+    Lazy, concurrent curl-based HTTP client with DNS pinning, retry, SSE, caching, and rate
+    limiting — extracted from [dashboard-kit](https://github.com/rafalmasiarek/php-dashboard-kit).
+
+includes:
+  - docs/api.md
+
+authors:
+  - name: Rafał Masiarek
+    github: rafalmasiarek
+    website: https://masiarek.pl
